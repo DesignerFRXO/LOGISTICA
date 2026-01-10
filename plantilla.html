@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logística Chile-Venezuela | Catálogo Interactivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #f6ad55;
+            --accent: #2b6cb0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-gradient {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.85)), 
+                        url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navegación -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-ship text-3xl text-blue-900"></i>
+                <span class="text-xl font-bold text-blue-900 uppercase tracking-wider">Logística Express</span>
+            </div>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#inicio" class="hover:text-orange-500 transition">Inicio</a>
+                <a href="#servicios" class="hover:text-orange-500 transition">Servicios</a>
+                <a href="#calculadora" class="hover:text-orange-500 transition">Calculadora</a>
+                <a href="#condiciones" class="hover:text-orange-500 transition">Condiciones</a>
+            </div>
+            <button class="bg-orange-500 text-white px-5 py-2 rounded-full font-bold hover:bg-orange-600 transition">
+                Contacto
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-gradient h-[500px] flex items-center justify-center text-center text-white px-4">
+        <div class="max-w-3xl">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Chile a Venezuela: Logística sin Fronteras</h1>
+            <p class="text-lg md:text-xl mb-8 opacity-90">Gestión profesional de envíos marítimos. Seguridad, transparencia y rapidez en cada milla.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#calculadora" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-bold text-lg transition">Calcular mi Envío</a>
+                <a href="#servicios" class="bg-white text-blue-900 px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition">Ver Catálogo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Servicios y Tarifas -->
+    <section id="servicios" class="max-w-7xl mx-auto py-16 px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-blue-900">Nuestras Tarifas de Servicio</h2>
+            <p class="text-gray-600 mt-2">Seleccione la modalidad de entrega que mejor se adapte a sus necesidades.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Tarifa Almacén -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover text-center">
+                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-warehouse text-2xl text-blue-900"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Retiro en Almacén</h3>
+                <p class="text-gray-500 mb-6 text-sm">Retire su carga directamente en nuestras sedes principales en Venezuela.</p>
+                <div class="text-3xl font-bold text-blue-900 mb-6">28.000 <span class="text-sm text-gray-400">CLP / Pie³</span></div>
+                <ul class="text-left space-y-3 mb-8 text-gray-600">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Sin costos de flete interno</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Almacenaje seguro</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Atención personalizada</li>
+                </ul>
+            </div>
+
+            <!-- Puerta a Puerta -->
+            <div class="bg-blue-900 p-8 rounded-2xl shadow-xl card-hover text-center text-white scale-105">
+                <div class="bg-orange-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-truck text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Puerta a Puerta (Directo)</h3>
+                <p class="opacity-80 mb-6 text-sm">Entrega directa por nuestro equipo en ciudades seleccionadas.</p>
+                <div class="text-3xl font-bold mb-6">+$2.5 <span class="text-sm opacity-60">USD / Pie³</span></div>
+                <ul class="text-left space-y-3 mb-8">
+                    <li><i class="fas fa-map-marker-alt text-orange-400 mr-2"></i> Barquisimeto y Cabudare</li>
+                    <li><i class="fas fa-map-marker-alt text-orange-400 mr-2"></i> Acarigua y Araure</li>
+                    <li><i class="fas fa-map-marker-alt text-orange-400 mr-2"></i> Barinas, Ospino y Guanare</li>
+                </ul>
+            </div>
+
+            <!-- Zoom -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover text-center">
+                <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <img src="https://www.zoom.red/wp-content/uploads/2021/05/logo-zoom.png" alt="Zoom Logo" class="w-10 grayscale hover:grayscale-0 transition">
+                </div>
+                <h3 class="text-xl font-bold mb-2">Aliado ZOOM</h3>
+                <p class="text-gray-500 mb-6 text-sm">Envíos a todo el territorio nacional a través de ZOOM.</p>
+                <div class="text-3xl font-bold text-blue-900 mb-6">$4.0 <span class="text-sm text-gray-400">USD / Pie³</span></div>
+                <ul class="text-left space-y-3 mb-8 text-gray-600">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Gestión de guía incluida</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Cobertura nacional</li>
+                    <li><i class="fas fa-info-circle text-orange-500 mr-2"></i> +10% recargo si pesa >30kg</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculadora Interactiva -->
+    <section id="calculadora" class="bg-gray-100 py-16 px-4">
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+            <div class="md:w-1/2 p-8 bg-blue-900 text-white">
+                <h2 class="text-3xl font-bold mb-4">Simulador de Costos</h2>
+                <p class="opacity-70 mb-8">Obtenga un estimado rápido de su envío marítimo.</p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Volumen (Pies Cúbicos)</label>
+                        <input type="number" id="inputPies" class="w-full bg-blue-800 border-none rounded-lg p-3 text-white placeholder-blue-300 focus:ring-2 focus:ring-orange-500" placeholder="Ej: 10">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Peso Estimado (Kilos)</label>
+                        <input type="number" id="inputPeso" class="w-full bg-blue-800 border-none rounded-lg p-3 text-white placeholder-blue-300 focus:ring-2 focus:ring-orange-500" placeholder="Ej: 15">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Tipo de Entrega</label>
+                        <select id="inputTipo" class="w-full bg-blue-800 border-none rounded-lg p-3 text-white focus:ring-2 focus:ring-orange-500">
+                            <option value="almacen">Retiro en Almacén (CLP)</option>
+                            <option value="directo">Puerta a Puerta USD (Zonas Directas)</option>
+                            <option value="zoom">ZOOM Nacional (USD)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 p-12 flex flex-col justify-center items-center text-center">
+                <div class="mb-4 text-gray-400 uppercase tracking-widest text-sm">Total Estimado</div>
+                <div id="resultadoMonto" class="text-6xl font-black text-blue-900 mb-2">0</div>
+                <div id="resultadoMoneda" class="text-xl font-bold text-orange-500 mb-8">CLP / USD</div>
+                <p class="text-xs text-gray-400 italic">* Los precios no incluyen impuestos de carga comercial (Aduana).</p>
+                <button onclick="calcular()" class="mt-8 bg-blue-900 text-white px-10 py-3 rounded-full font-bold hover:bg-blue-800 transition shadow-lg">Calcular Ahora</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Impuestos Aduanales -->
+    <section class="max-w-7xl mx-auto py-16 px-4">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <h2 class="text-3xl font-bold text-blue-900 mb-6">Cargas Comerciales e Impuestos</h2>
+                <p class="text-gray-600 mb-8 text-lg">Ciertos artículos requieren una declaración especial ante la aduana venezolana. Estos montos son fijos y obligatorios por unidad.</p>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 border border-gray-100 rounded-xl bg-white shadow-sm flex items-center space-x-4">
+                        <i class="fas fa-tv text-2xl text-blue-900"></i>
+                        <div><p class="text-xs text-gray-400">Televisor</p><p class="font-bold">$38 USD</p></div>
+                    </div>
+                    <div class="p-4 border border-gray-100 rounded-xl bg-white shadow-sm flex items-center space-x-4">
+                        <i class="fas fa-snowflake text-2xl text-blue-900"></i>
+                        <div><p class="text-xs text-gray-400">Aire Acond.</p><p class="font-bold">$38 USD</p></div>
+                    </div>
+                    <div class="p-4 border border-gray-100 rounded-xl bg-white shadow-sm flex items-center space-x-4">
+                        <i class="fas fa-blender text-2xl text-blue-900"></i>
+                        <div><p class="text-xs text-gray-400">Nevera</p><p class="font-bold">$76 USD</p></div>
+                    </div>
+                    <div class="p-4 border border-gray-100 rounded-xl bg-white shadow-sm flex items-center space-x-4">
+                        <i class="fas fa-satellite text-2xl text-blue-900"></i>
+                        <div><p class="text-xs text-gray-400">Starlink</p><p class="font-bold">$56 USD</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800" alt="Almacén Aduana" class="rounded-3xl shadow-lg">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Interactiva: Prohibidos vs Permitidos -->
+    <section id="condiciones" class="bg-blue-900 py-16 px-4 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">Condiciones del Servicio</h2>
+                <div class="flex justify-center mt-6 space-x-4">
+                    <button onclick="switchTab('prohibido')" class="tab-btn active bg-orange-500 px-6 py-2 rounded-full font-bold">Artículos Prohibidos</button>
+                    <button onclick="switchTab('logistica')" class="tab-btn bg-blue-800 px-6 py-2 rounded-full font-bold">Logística y Pagos</button>
+                </div>
+            </div>
+
+            <!-- Tab Prohibidos -->
+            <div id="tab-prohibido" class="tab-content active">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-white/10 p-6 rounded-xl text-center border border-white/10">
+                        <i class="fas fa-mobile-alt text-3xl text-red-400 mb-4"></i>
+                        <p class="font-bold">Celulares</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-xl text-center border border-white/10">
+                        <i class="fas fa-capsules text-3xl text-red-400 mb-4"></i>
+                        <p class="font-bold">Medicamentos</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-xl text-center border border-white/10">
+                        <i class="fas fa-plane text-3xl text-red-400 mb-4"></i>
+                        <p class="font-bold">Drones</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-xl text-center border border-white/10">
+                        <i class="fas fa-fire text-3xl text-red-400 mb-4"></i>
+                        <p class="font-bold">Inflamables</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-xl text-center border border-white/10">
+                        <i class="fas fa-cogs text-3xl text-red-400 mb-4"></i>
+                        <p class="font-bold">Motores / Cajas</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-xl text-center border border-white/10">
+                        <i class="fas fa-skull text-3xl text-red-400 mb-4"></i>
+                        <p class="font-bold">Restos Humanos</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-xl text-center border border-white/10">
+                        <i class="fas fa-hat-wizard text-3xl text-red-400 mb-4"></i>
+                        <p class="font-bold">Brujería</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-xl text-center border border-white/10">
+                        <i class="fas fa-exclamation-triangle text-3xl text-yellow-400 mb-4"></i>
+                        <p class="font-bold">Cajas >100kg</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Logística -->
+            <div id="tab-logistica" class="tab-content">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white/10 p-8 rounded-2xl border border-white/10">
+                        <h4 class="text-xl font-bold mb-4 text-orange-400"><i class="fas fa-clock mr-2"></i> Tiempos y Salidas</h4>
+                        <ul class="space-y-4 opacity-90">
+                            <li>• Salidas quincenales (2 veces al mes).</li>
+                            <li>• Tiempo de tránsito: 30 a 40 días tras el zarpe.</li>
+                            <li>• Recepción de carga: Hasta 2 días antes del zarpe.</li>
+                            <li>• Sujeto a condiciones de fuerza mayor o "Roleo".</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/10 p-8 rounded-2xl border border-white/10">
+                        <h4 class="text-xl font-bold mb-4 text-orange-400"><i class="fas fa-wallet mr-2"></i> Pagos y Responsabilidad</h4>
+                        <ul class="space-y-4 opacity-90">
+                            <li>• Pagos por adelantado al entregar en bodega Yum.</li>
+                            <li>• Remisión obligatoria de todas las cajas.</li>
+                            <li>• No nos responsabilizamos por derrames o roturas (TV).</li>
+                            <li>• Gastos de aforo en Chile se facturan transparentemente.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contacto -->
+    <footer class="bg-white py-12 border-t">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-8 md:mb-0 text-center md:text-left">
+                <div class="flex items-center space-x-2 mb-4 justify-center md:justify-start">
+                    <i class="fas fa-ship text-2xl text-blue-900"></i>
+                    <span class="text-lg font-bold text-blue-900 uppercase">Logística Express</span>
+                </div>
+                <p class="text-gray-400 text-sm">Su puente de confianza entre Chile y Venezuela.</p>
+            </div>
+            
+            <div class="flex space-x-6 text-2xl text-blue-900">
+                <a href="#" class="hover:text-orange-500"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="hover:text-orange-500"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-orange-500"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+        <div class="text-center mt-10 text-gray-300 text-xs">
+            © 2026 Logística Express. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        function calcular() {
+            const pies = parseFloat(document.getElementById('inputPies').value) || 0;
+            const peso = parseFloat(document.getElementById('inputPeso').value) || 0;
+            const tipo = document.getElementById('inputTipo').value;
+            let total = 0;
+            let moneda = "";
+
+            if (tipo === 'almacen') {
+                total = pies * 28000;
+                moneda = "CLP";
+            } else if (tipo === 'directo') {
+                total = pies * 2.5;
+                moneda = "USD";
+            } else if (tipo === 'zoom') {
+                let tarifaBase = 4;
+                if (peso > 30) {
+                    tarifaBase = 4.4;
+                }
+                total = pies * tarifaBase;
+                moneda = "USD";
+            }
+
+            document.getElementById('resultadoMonto').innerText = total.toLocaleString(tipo === 'almacen' ? 'es-CL' : 'en-US');
+            document.getElementById('resultadoMoneda').innerText = moneda;
+        }
+
+        function switchTab(tab) {
+            // Ocultar todos
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('bg-orange-500', 'bg-blue-800'));
+            
+            // Mostrar activo
+            document.getElementById('tab-' + tab).classList.add('active');
+            event.target.classList.add('bg-orange-500');
+        }
+
+        // Animación simple de entrada al cargar
+        window.onload = () => {
+            console.log("App de Logística lista.");
+        };
+    </script>
+</body>
+</html>
