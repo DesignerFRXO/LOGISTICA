@@ -11,77 +11,81 @@
     <style>
         /* CSS RESET & BASE STYLES */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #0f172a; overflow: hidden; font-family: 'Lato', sans-serif; }
+        body { 
+            background-color: #0f172a; 
+            overflow: hidden; 
+            font-family: 'Lato', sans-serif;
+            touch-action: none; /* Previene scroll del navegador para manejar el swipe */
+        }
 
         /* SLIDE CONTAINER */
         .slide-container {
             width: 100vw;
             height: 100vh;
             position: relative;
-            display: none; /* Controlled by JS */
+            display: none; 
             background-color: #0f172a;
             color: #f8fafc;
             padding: 40px 10%;
-            overflow: hidden;
+            overflow-y: auto; /* Permite scroll interno si el contenido es largo en móviles */
             flex-direction: column;
             justify-content: center;
         }
 
-        .slide-container.active { display: flex; animation: slideFade 0.5s ease-out; }
+        .slide-container.active { display: flex; animation: slideFade 0.4s ease-out; }
 
         @keyframes slideFade {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        /* BACKGROUND IMAGES WITH OPTIMAL OPACITY */
+        /* BACKGROUND IMAGES */
         .slide-bg {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.25; 
+            opacity: 0.22; 
             z-index: 0;
         }
 
         .slide-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 20%, rgba(15, 23, 42, 0.5) 100%);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 10%, rgba(15, 23, 42, 0.7) 100%);
             z-index: 1;
         }
 
-        .content-area { position: relative; z-index: 2; width: 100%; max-width: 1100px; }
+        .content-area { position: relative; z-index: 2; width: 100%; max-width: 1100px; margin: auto; }
 
         /* LOGO POSITIONING */
         .fixed-logo {
             position: fixed;
-            top: 30px;
-            right: 40px;
-            height: 60px;
+            top: 20px;
+            right: 20px;
+            height: clamp(35px, 7vw, 60px);
             z-index: 100;
             filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
         }
 
         /* TYPOGRAPHY */
         h1, h2, h3 { font-family: 'Poppins', sans-serif; text-transform: uppercase; margin: 0; color: #fff; }
-        h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1.1; margin-bottom: 20px; }
-        .slide-title { font-size: clamp(28px, 4vw, 48px); margin-bottom: 30px; border-left: 8px solid #f97316; padding-left: 20px; color: #f97316; }
-        p, li { font-size: clamp(16px, 2vw, 22px); line-height: 1.6; color: #cbd5e1; }
+        h1 { font-size: clamp(30px, 7vw, 68px); line-height: 1.1; margin-bottom: 20px; }
+        .slide-title { font-size: clamp(22px, 4vw, 44px); margin-bottom: 25px; border-left: 6px solid #f97316; padding-left: 15px; color: #f97316; }
+        p, li { font-size: clamp(15px, 2vw, 21px); line-height: 1.5; color: #cbd5e1; }
         strong { color: #f97316; font-weight: 700; }
 
         /* NAVIGATION BUTTONS */
         .nav-btn {
             position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(15, 23, 42, 0.6);
-            border: 2px solid rgba(249, 115, 22, 0.5);
+            bottom: 30px;
+            background: rgba(249, 115, 22, 0.9);
+            border: none;
             color: #fff;
             width: 50px;
             height: 50px;
@@ -91,49 +95,49 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .nav-btn:hover { background: #f97316; border-color: #f97316; transform: translateY(-50%) scale(1.1); box-shadow: 0 0 20px rgba(249, 115, 22, 0.4); }
-        .nav-btn.left { left: 30px; }
-        .nav-btn.right { right: 30px; }
+        .nav-btn:active { transform: scale(0.9); }
+        .nav-btn.left { left: 20px; }
+        .nav-btn.right { right: 20px; }
+        .nav-btn.hidden { display: none; }
 
         /* COMPONENTS */
-        .two-column { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
-        .price-tag { background: #f97316; color: #fff; padding: 15px 35px; border-radius: 12px; font-size: clamp(30px, 5vw, 48px); font-weight: 700; display: inline-block; margin: 20px 0; box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3); }
+        .two-column { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; align-items: center; }
+        .price-tag { background: #f97316; color: #fff; padding: 12px 25px; border-radius: 12px; font-size: clamp(24px, 5vw, 42px); font-weight: 700; display: inline-block; margin: 15px 0; box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3); }
         
-        .tile-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .tile { background: rgba(30, 41, 59, 0.6); padding: 25px; border-radius: 20px; border-top: 4px solid #f97316; backdrop-filter: blur(10px); }
-        .tile h3 { font-size: 20px; margin-bottom: 12px; color: #f97316; }
-        .tile p { font-size: 16px; }
+        .tile-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 15px; }
+        .tile { background: rgba(30, 41, 59, 0.7); padding: 20px; border-radius: 15px; border-top: 4px solid #f97316; backdrop-filter: blur(10px); }
+        .tile h3 { font-size: 18px; margin-bottom: 10px; color: #f97316; }
+        .tile p { font-size: 15px; }
 
-        .infographic-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-        .info-item { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 15px; border-radius: 15px; text-align: center; transition: 0.3s; }
-        .info-item:hover { background: rgba(239, 68, 68, 0.15); transform: translateY(-5px); }
-        .info-item i { font-size: clamp(24px, 4vw, 36px); color: #ef4444; margin-bottom: 10px; }
-        .info-item span { display: block; font-weight: 700; font-size: 12px; text-transform: uppercase; color: #fff; }
+        .infographic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+        .info-item { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 12px; border-radius: 12px; text-align: center; }
+        .info-item i { font-size: 24px; color: #ef4444; margin-bottom: 8px; }
+        .info-item span { display: block; font-weight: 700; font-size: 11px; text-transform: uppercase; color: #fff; }
 
-        .contact-card { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px; }
+        .contact-card { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
         .contact-link { 
-            background: #25d366; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-size: 20px; font-weight: 700; 
-            display: flex; align-items: center; gap: 12px; transition: 0.3s; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+            background: #25d366; color: white; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-size: 18px; font-weight: 700; 
+            display: flex; align-items: center; gap: 10px; transition: 0.3s; box-shadow: 0 8px 15px rgba(37, 211, 102, 0.2);
+            width: fit-content;
         }
-        .contact-link.web { background: #1e3a8a; box-shadow: 0 10px 20px rgba(30, 58, 138, 0.2); }
-        .contact-link:hover { transform: translateY(-3px); filter: brightness(1.1); }
+        .contact-link.web { background: #1e3a8a; box-shadow: 0 8px 15px rgba(30, 58, 138, 0.2); }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: rgba(30, 41, 59, 0.4); border-radius: 15px; overflow: hidden; }
-        th { background: rgba(249, 115, 22, 0.15); text-align: left; padding: 15px; border-bottom: 2px solid #f97316; font-size: 18px; }
-        td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 18px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: rgba(30, 41, 59, 0.4); border-radius: 12px; overflow: hidden; font-size: 14px; }
+        th { background: rgba(249, 115, 22, 0.2); text-align: left; padding: 12px; border-bottom: 2px solid #f97316; }
+        td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
-        .slide-counter { position: fixed; bottom: 30px; right: 40px; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.3); }
+        .slide-counter { position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); z-index: 100; }
 
-        @media (max-width: 768px) {
-            .two-column { grid-template-columns: 1fr; }
-            .nav-btn { width: 40px; height: 40px; font-size: 16px; }
-            .slide-container { padding: 30px 60px; }
-            .fixed-logo { height: 40px; top: 20px; right: 20px; }
-            .infographic-grid { grid-template-columns: repeat(2, 1fr); }
+        /* MOBILE ADJUSTMENTS */
+        @media (max-width: 600px) {
+            .slide-container { padding: 60px 25px 80px 25px; justify-content: flex-start; }
+            .content-area { padding-top: 20px; }
+            .nav-btn { bottom: 20px; width: 45px; height: 45px; }
+            .slide-counter { bottom: 35px; }
         }
     </style>
 </head>
@@ -141,8 +145,8 @@
 
     <img src="https://yumexpresschile.cl/assets/img/logo/yum/logo-three.png" class="fixed-logo" alt="Yum Express Logo">
 
-    <button class="nav-btn left" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
-    <button class="nav-btn right" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+    <button id="btnPrev" class="nav-btn left hidden" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+    <button id="btnNext" class="nav-btn right" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
 
     <div class="slide-counter" id="counter">01 / 12</div>
 
@@ -152,14 +156,14 @@
         <div class="slide-overlay"></div>
         <div class="content-area">
             <h1>Catálogo de <br><span style="color: #f97316;">Servicios Marítimos</span></h1>
-            <p style="font-size: clamp(24px, 4vw, 32px); color: #fff; font-weight: 700; margin-bottom: 20px;">Aliados Comerciales 2026</p>
+            <p style="font-size: clamp(20px, 4vw, 32px); color: #fff; font-weight: 700; margin-bottom: 20px;">Aliados Comerciales 2026</p>
             <p style="max-width: 800px;">Soluciones logísticas integrales desde Chile hasta Venezuela. Descubra cómo optimizar sus importaciones con el respaldo de Yum Express.</p>
         </div>
     </div>
 
     <!-- SLIDE 2: MODELO DE NEGOCIO -->
     <div class="slide-container" id="slide2">
-        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1280" class="slide-bg" alt="Warehouse background">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1280" class="slide-bg">
         <div class="slide-overlay"></div>
         <div class="content-area">
             <h2 class="slide-title">Propuesta para Aliados</h2>
@@ -167,15 +171,15 @@
                 <div>
                     <p>Diseñamos un ecosistema donde usted tiene el control comercial mientras nosotros nos encargamos del músculo operativo.</p>
                     <ul style="margin-top: 25px; list-style: none;">
-                        <li style="margin-bottom: 15px;"><i class="fa-solid fa-circle-check" style="color: #f97316; margin-right: 12px;"></i> <strong>Tarifa Mayorista:</strong> Acceso a costos base preferenciales.</li>
-                        <li style="margin-bottom: 15px;"><i class="fa-solid fa-circle-check" style="color: #f97316; margin-right: 12px;"></i> <strong>Marca Blanca:</strong> Usted atiende a sus clientes finales directamente.</li>
-                        <li><i class="fa-solid fa-circle-check" style="color: #f97316; margin-right: 12px;"></i> <strong>Flujo Constante:</strong> Salidas programadas cada 15 días.</li>
+                        <li style="margin-bottom: 12px;"><i class="fa-solid fa-circle-check" style="color: #f97316; margin-right: 10px;"></i> <strong>Tarifa Mayorista:</strong> Acceso a costos base preferenciales.</li>
+                        <li style="margin-bottom: 12px;"><i class="fa-solid fa-circle-check" style="color: #f97316; margin-right: 10px;"></i> <strong>Marca Blanca:</strong> Usted atiende a sus clientes finales directamente.</li>
+                        <li><i class="fa-solid fa-circle-check" style="color: #f97316; margin-right: 10px;"></i> <strong>Flujo Constante:</strong> Salidas programadas cada 15 días.</li>
                     </ul>
                 </div>
                 <div style="text-align: center;">
-                    <div class="tile" style="display: inline-block; padding: 40px;">
-                        <i class="fa-solid fa-handshake" style="font-size: 60px; color: #f97316; margin-bottom: 15px;"></i>
-                        <p style="font-size: 24px; font-weight: 700; color: #fff;">Socio Estratégico</p>
+                    <div class="tile" style="display: inline-block; padding: 30px;">
+                        <i class="fa-solid fa-handshake" style="font-size: 50px; color: #f97316; margin-bottom: 15px;"></i>
+                        <p style="font-size: 20px; font-weight: 700; color: #fff;">Socio Estratégico</p>
                     </div>
                 </div>
             </div>
@@ -215,12 +219,12 @@
             <div class="two-column">
                 <div>
                     <p>Gestionamos la entrega directa en domicilio para la zona de Occidente mediante nuestra propia flota.</p>
-                    <div class="price-tag" style="font-size: 32px; background: rgba(249,115,22,0.2); border: 1px solid #f97316; color: #f97316;">+$2.5 USD / Ft³</div>
-                    <p style="font-size: 16px; margin-top: 10px;">Costo adicional por despacho local en ruta establecida.</p>
+                    <div class="price-tag" style="font-size: 28px; background: rgba(249,115,22,0.2); border: 1px solid #f97316; color: #f97316;">+$2.5 USD / Ft³</div>
+                    <p style="font-size: 15px; margin-top: 5px;">Costo adicional por despacho local en ruta establecida.</p>
                 </div>
                 <div class="tile">
                     <h3>Ruta Occidente:</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 14px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
                         <span>• Acarigua / Araure</span>
                         <span>• Ospino</span>
                         <span>• Guanare</span>
@@ -262,7 +266,7 @@
         <div class="slide-overlay"></div>
         <div class="content-area">
             <h2 class="slide-title">Tasas de Carga Comercial</h2>
-            <p style="margin-bottom: 20px;">Artículos específicos con impuestos fijos obligatorios por la aduana:</p>
+            <p style="margin-bottom: 15px;">Artículos específicos con impuestos fijos obligatorios por la aduana:</p>
             <table>
                 <thead>
                     <tr>
@@ -289,12 +293,12 @@
             <h2 class="slide-title">Frecuencia y Tránsito</h2>
             <div class="two-column">
                 <div class="tile">
-                    <i class="fa-solid fa-calendar-days" style="font-size: 40px; color: #f97316; margin-bottom: 15px;"></i>
+                    <i class="fa-solid fa-calendar-days" style="font-size: 36px; color: #f97316; margin-bottom: 12px;"></i>
                     <h3>Salidas Quincenales</h3>
                     <p>Dos zarpes mensuales garantizados para mantener la rotación de su inventario.</p>
                 </div>
                 <div class="tile">
-                    <i class="fa-solid fa-clock" style="font-size: 40px; color: #f97316; margin-bottom: 15px;"></i>
+                    <i class="fa-solid fa-clock" style="font-size: 36px; color: #f97316; margin-bottom: 12px;"></i>
                     <h3>Tiempo Estimado</h3>
                     <p>De <strong>30 a 40 días</strong> desde el zarpe hasta la disponibilidad en almacén de Venezuela.</p>
                 </div>
@@ -308,15 +312,15 @@
         <div class="slide-overlay"></div>
         <div class="content-area">
             <h2 class="slide-title">Transparencia en Gastos</h2>
-            <div class="tile" style="margin-bottom: 30px;">
+            <div class="tile" style="margin-bottom: 20px;">
                 <p>En caso de aforo físico (inspección) en el puerto de Chile, se generan costos adicionales proporcionales al volumen de carga de cada aliado.</p>
             </div>
             <div class="two-column">
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px;">
-                    <p><i class="fa-solid fa-receipt" style="color: #f97316; margin-right: 10px;"></i><strong>Prueba de Costo:</strong> Entregamos reportes y facturas de la unidad para certificar los gastos aduanales.</p>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+                    <p><i class="fa-solid fa-receipt" style="color: #f97316; margin-right: 8px;"></i><strong>Prueba de Costo:</strong> Entregamos reportes y facturas para certificar los gastos aduanales.</p>
                 </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px;">
-                    <p><i class="fa-solid fa-chart-pie" style="color: #f97316; margin-right: 10px;"></i><strong>Cálculo Justo:</strong> Usted solo paga el porcentaje que le corresponde según el Ft³ ocupado.</p>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+                    <p><i class="fa-solid fa-chart-pie" style="color: #f97316; margin-right: 8px;"></i><strong>Cálculo Justo:</strong> Usted solo paga el porcentaje que le corresponde según el Ft³ ocupado.</p>
                 </div>
             </div>
         </div>
@@ -329,13 +333,13 @@
         <div class="content-area">
             <h2 class="slide-title">Alertas de Carga Pesada</h2>
             <div class="two-column">
-                <div style="background: rgba(239, 68, 68, 0.1); border: 2px dashed #ef4444; padding: 35px; border-radius: 20px;">
-                    <h3 style="color: #ef4444; margin-bottom: 15px;">Límite de 100 Kilos</h3>
+                <div style="background: rgba(239, 68, 68, 0.1); border: 2px dashed #ef4444; padding: 25px; border-radius: 15px;">
+                    <h3 style="color: #ef4444; margin-bottom: 10px;">Límite de 100 Kilos</h3>
                     <p>Es <strong>obligatorio reportar</strong> cualquier bulto que exceda los 100kg.</p>
-                    <p style="font-size: 14px; margin-top: 15px; color: #fff;">• Zoom no acepta estas dimensiones.<br>• Requiere manejo con montacargas especializado.<br>• Incrementa costos de estiba en puerto.</p>
+                    <p style="font-size: 13px; margin-top: 10px; color: #fff;">• Zoom no acepta estas dimensiones.<br>• Requiere manejo especializado.<br>• Incrementa costos de estiba en puerto.</p>
                 </div>
-                <div style="text-align: center;">
-                    <i class="fa-solid fa-weight-hanging" style="font-size: 100px; color: rgba(255,255,255,0.1);"></i>
+                <div style="text-align: center;" class="hide-mobile">
+                    <i class="fa-solid fa-weight-hanging" style="font-size: 80px; color: rgba(255,255,255,0.1);"></i>
                 </div>
             </div>
         </div>
@@ -357,8 +361,8 @@
                     <p>Daños causados por aceites, químicos o líquidos mal sellados dentro de las cajas no son cubiertos.</p>
                 </div>
             </div>
-            <div style="margin-top: 30px; background: rgba(249,115,22,0.1); padding: 25px; border-radius: 15px; border: 1px solid #f97316;">
-                <p><strong>Nota:</strong> Las inspecciones de aduana son procesos legales donde la carga es manipulada por terceros oficiales. Recomendamos un embalaje profesional reforzado.</p>
+            <div style="margin-top: 20px; background: rgba(249,115,22,0.1); padding: 15px; border-radius: 12px; border: 1px solid #f97316;">
+                <p style="font-size: 14px;"><strong>Nota:</strong> Las inspecciones de aduana son procesos donde la carga es manipulada por terceros oficiales. Recomendamos un embalaje profesional reforzado.</p>
             </div>
         </div>
     </div>
@@ -377,9 +381,9 @@
                 <div class="info-item"><i class="fa-solid fa-screwdriver-wrench"></i><span>Motores</span></div>
                 <div class="info-item"><i class="fa-solid fa-skull"></i><span>Restos</span></div>
                 <div class="info-item"><i class="fa-solid fa-magic"></i><span>Esoterismo</span></div>
-                <div class="info-item" style="background: #ef4444;"><i class="fa-solid fa-ban" style="color:#fff;"></i><span>TOTAL</span></div>
+                <div class="info-item" style="background: #ef4444; border-color: transparent;"><i class="fa-solid fa-ban" style="color:#fff;"></i><span>TOTAL</span></div>
             </div>
-            <p style="margin-top: 25px; text-align: center; color: #ef4444; font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 2px;">El envío de estos productos anula la responsabilidad y pone en riesgo el contenedor.</p>
+            <p style="margin-top: 20px; text-align: center; color: #ef4444; font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">El envío de estos productos anula la responsabilidad y pone en riesgo el contenedor.</p>
         </div>
     </div>
 
@@ -389,7 +393,7 @@
         <div class="slide-overlay"></div>
         <div class="content-area">
             <h1>Empecemos a <br><span style="color: #f97316;">Crecer Juntos</span></h1>
-            <p style="margin-bottom: 40px;">Contáctenos para coordinar su primera entrega y formar parte de nuestra red de aliados exclusivos.</p>
+            <p style="margin-bottom: 30px;">Contáctenos para coordinar su primera entrega y formar parte de nuestra red de aliados exclusivos.</p>
             
             <div class="contact-card">
                 <a href="https://wa.me/+56955286990" class="contact-link" target="_blank">
@@ -406,32 +410,81 @@
         let currentSlide = 1;
         const totalSlides = 12;
         const counter = document.getElementById('counter');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+
+        function updateNavigationUI() {
+            // Manejar Botón Atrás (Ocultar en la primera)
+            if (currentSlide === 1) {
+                btnPrev.classList.add('hidden');
+            } else {
+                btnPrev.classList.remove('hidden');
+            }
+
+            // Manejar Botón Siguiente (Cambiar a Reiniciar en la última)
+            const icon = btnNext.querySelector('i');
+            if (currentSlide === totalSlides) {
+                icon.className = 'fa-solid fa-rotate-left';
+            } else {
+                icon.className = 'fa-solid fa-chevron-right';
+            }
+        }
 
         function showSlide(n) {
-            // Hide all
+            // Ocultar todas
             for (let i = 1; i <= totalSlides; i++) {
                 document.getElementById('slide' + i).classList.remove('active');
             }
-            // Show new
+            // Mostrar la elegida
             document.getElementById('slide' + n).classList.add('active');
             currentSlide = n;
             counter.innerText = `${n.toString().padStart(2, '0')} / ${totalSlides}`;
+            updateNavigationUI();
+            
+            // Scroll al inicio de la diapositiva (útil en móviles si hubo scroll previo)
+            document.getElementById('slide' + n).scrollTop = 0;
         }
 
         function nextSlide() {
-            if (currentSlide < totalSlides) showSlide(currentSlide + 1);
-            else showSlide(1);
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            } else {
+                showSlide(1); // Reiniciar
+            }
         }
 
         function prevSlide() {
-            if (currentSlide > 1) showSlide(currentSlide - 1);
-            else showSlide(totalSlides);
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
         }
 
+        // --- GESTOS TÁCTILES (SWIPE) ---
+        let touchstartX = 0;
+        let touchendX = 0;
+        
+        function handleGesture() {
+            if (touchendX < touchstartX - 60) nextSlide(); // Swipe izquierda -> siguiente
+            if (touchendX > touchstartX + 60) prevSlide(); // Swipe derecha -> atrás
+        }
+
+        document.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleGesture();
+        });
+
+        // --- TECLADO ---
         document.addEventListener('keydown', (e) => {
             if (e.key === "ArrowRight") nextSlide();
             if (e.key === "ArrowLeft") prevSlide();
         });
+
+        // Inicializar interfaz
+        updateNavigationUI();
     </script>
 </body>
 </html>
