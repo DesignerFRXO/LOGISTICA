@@ -15,7 +15,7 @@
             background-color: #0f172a; 
             overflow: hidden; 
             font-family: 'Lato', sans-serif;
-            touch-action: none; /* Previene scroll del navegador para manejar el swipe */
+            touch-action: none; 
         }
 
         /* SLIDE CONTAINER */
@@ -27,7 +27,7 @@
             background-color: #0f172a;
             color: #f8fafc;
             padding: 40px 10%;
-            overflow-y: auto; /* Permite scroll interno si el contenido es largo en móviles */
+            overflow-y: auto;
             flex-direction: column;
             justify-content: center;
         }
@@ -39,7 +39,7 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* BACKGROUND IMAGES */
+        /* BACKGROUND IMAGES - AJUSTADO PARA MÁS VISIBILIDAD */
         .slide-bg {
             position: fixed;
             top: 0;
@@ -47,7 +47,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.22; 
+            opacity: 0.45; /* Opacidad aumentada para apreciar mejor la imagen */
             z-index: 0;
         }
 
@@ -57,7 +57,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 10%, rgba(15, 23, 42, 0.7) 100%);
+            /* Gradiente optimizado: más oscuro donde hay texto, más claro en el resto */
+            background: linear-gradient(160deg, rgba(15, 23, 42, 0.9) 20%, rgba(15, 23, 42, 0.4) 100%);
             z-index: 1;
         }
 
@@ -70,21 +71,32 @@
             right: 20px;
             height: clamp(35px, 7vw, 60px);
             z-index: 100;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
         }
 
-        /* TYPOGRAPHY */
-        h1, h2, h3 { font-family: 'Poppins', sans-serif; text-transform: uppercase; margin: 0; color: #fff; }
+        /* TYPOGRAPHY - SOMBRAS AÑADIDAS PARA MEJOR CONTRASTE */
+        h1, h2, h3 { 
+            font-family: 'Poppins', sans-serif; 
+            text-transform: uppercase; 
+            margin: 0; 
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
         h1 { font-size: clamp(30px, 7vw, 68px); line-height: 1.1; margin-bottom: 20px; }
         .slide-title { font-size: clamp(22px, 4vw, 44px); margin-bottom: 25px; border-left: 6px solid #f97316; padding-left: 15px; color: #f97316; }
-        p, li { font-size: clamp(15px, 2vw, 21px); line-height: 1.5; color: #cbd5e1; }
+        p, li { 
+            font-size: clamp(15px, 2vw, 21px); 
+            line-height: 1.5; 
+            color: #ffffff; /* Texto blanco puro para máximo contraste */
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+        }
         strong { color: #f97316; font-weight: 700; }
 
         /* NAVIGATION BUTTONS */
         .nav-btn {
             position: fixed;
             bottom: 30px;
-            background: rgba(249, 115, 22, 0.9);
+            background: rgba(249, 115, 22, 1);
             border: none;
             color: #fff;
             width: 50px;
@@ -97,7 +109,7 @@
             justify-content: center;
             font-size: 18px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         .nav-btn:active { transform: scale(0.9); }
         .nav-btn.left { left: 20px; }
@@ -106,31 +118,38 @@
 
         /* COMPONENTS */
         .two-column { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; align-items: center; }
-        .price-tag { background: #f97316; color: #fff; padding: 12px 25px; border-radius: 12px; font-size: clamp(24px, 5vw, 42px); font-weight: 700; display: inline-block; margin: 15px 0; box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3); }
+        .price-tag { background: #f97316; color: #fff; padding: 12px 25px; border-radius: 12px; font-size: clamp(24px, 5vw, 42px); font-weight: 700; display: inline-block; margin: 15px 0; box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
         
         .tile-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 15px; }
-        .tile { background: rgba(30, 41, 59, 0.7); padding: 20px; border-radius: 15px; border-top: 4px solid #f97316; backdrop-filter: blur(10px); }
+        .tile { 
+            background: rgba(15, 23, 42, 0.85); /* Fondo más opaco para legibilidad */
+            padding: 20px; 
+            border-radius: 15px; 
+            border-top: 4px solid #f97316; 
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
         .tile h3 { font-size: 18px; margin-bottom: 10px; color: #f97316; }
-        .tile p { font-size: 15px; }
+        .tile p { font-size: 15px; text-shadow: none; }
 
         .infographic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
-        .info-item { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 12px; border-radius: 12px; text-align: center; }
+        .info-item { background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(239, 68, 68, 0.3); padding: 12px; border-radius: 12px; text-align: center; }
         .info-item i { font-size: 24px; color: #ef4444; margin-bottom: 8px; }
         .info-item span { display: block; font-weight: 700; font-size: 11px; text-transform: uppercase; color: #fff; }
 
         .contact-card { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
         .contact-link { 
             background: #25d366; color: white; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-size: 18px; font-weight: 700; 
-            display: flex; align-items: center; gap: 10px; transition: 0.3s; box-shadow: 0 8px 15px rgba(37, 211, 102, 0.2);
+            display: flex; align-items: center; gap: 10px; transition: 0.3s; box-shadow: 0 8px 15px rgba(0,0,0,0.3);
             width: fit-content;
         }
-        .contact-link.web { background: #1e3a8a; box-shadow: 0 8px 15px rgba(30, 58, 138, 0.2); }
+        .contact-link.web { background: #1e3a8a; }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: rgba(30, 41, 59, 0.4); border-radius: 12px; overflow: hidden; font-size: 14px; }
-        th { background: rgba(249, 115, 22, 0.2); text-align: left; padding: 12px; border-bottom: 2px solid #f97316; }
-        td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: rgba(15, 23, 42, 0.8); border-radius: 12px; overflow: hidden; font-size: 14px; }
+        th { background: rgba(249, 115, 22, 0.3); text-align: left; padding: 12px; border-bottom: 2px solid #f97316; }
+        td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-        .slide-counter { position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); z-index: 100; }
+        .slide-counter { position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.6); z-index: 100; text-shadow: 1px 1px 2px #000; }
 
         /* MOBILE ADJUSTMENTS */
         @media (max-width: 600px) {
@@ -152,11 +171,11 @@
 
     <!-- SLIDE 1: PORTADA -->
     <div class="slide-container active" id="slide1">
-        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=1280" class="slide-bg" alt="Logistics background">
+        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=1280" class="slide-bg" alt="Fondo Logístico">
         <div class="slide-overlay"></div>
         <div class="content-area">
             <h1>Catálogo de <br><span style="color: #f97316;">Servicios Marítimos</span></h1>
-            <p style="font-size: clamp(20px, 4vw, 32px); color: #fff; font-weight: 700; margin-bottom: 20px;">Aliados Comerciales 2026</p>
+            <p style="font-size: clamp(20px, 4vw, 32px); color: #fff; font-weight: 700; margin-bottom: 20px; text-shadow: 2px 2px 10px #000;">Aliados Comerciales 2026</p>
             <p style="max-width: 800px;">Soluciones logísticas integrales desde Chile hasta Venezuela. Descubra cómo optimizar sus importaciones con el respaldo de Yum Express.</p>
         </div>
     </div>
@@ -219,7 +238,7 @@
             <div class="two-column">
                 <div>
                     <p>Gestionamos la entrega directa en domicilio para la zona de Occidente mediante nuestra propia flota.</p>
-                    <div class="price-tag" style="font-size: 28px; background: rgba(249,115,22,0.2); border: 1px solid #f97316; color: #f97316;">+$2.5 USD / Ft³</div>
+                    <div class="price-tag" style="font-size: 28px; background: rgba(15, 23, 42, 0.8); border: 1px solid #f97316; color: #f97316;">+$2.5 USD / Ft³</div>
                     <p style="font-size: 15px; margin-top: 5px;">Costo adicional por despacho local en ruta establecida.</p>
                 </div>
                 <div class="tile">
@@ -316,10 +335,10 @@
                 <p>En caso de aforo físico (inspección) en el puerto de Chile, se generan costos adicionales proporcionales al volumen de carga de cada aliado.</p>
             </div>
             <div class="two-column">
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+                <div style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
                     <p><i class="fa-solid fa-receipt" style="color: #f97316; margin-right: 8px;"></i><strong>Prueba de Costo:</strong> Entregamos reportes y facturas para certificar los gastos aduanales.</p>
                 </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+                <div style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
                     <p><i class="fa-solid fa-chart-pie" style="color: #f97316; margin-right: 8px;"></i><strong>Cálculo Justo:</strong> Usted solo paga el porcentaje que le corresponde según el Ft³ ocupado.</p>
                 </div>
             </div>
@@ -333,13 +352,13 @@
         <div class="content-area">
             <h2 class="slide-title">Alertas de Carga Pesada</h2>
             <div class="two-column">
-                <div style="background: rgba(239, 68, 68, 0.1); border: 2px dashed #ef4444; padding: 25px; border-radius: 15px;">
+                <div style="background: rgba(15, 23, 42, 0.9); border: 2px dashed #ef4444; padding: 25px; border-radius: 15px;">
                     <h3 style="color: #ef4444; margin-bottom: 10px;">Límite de 100 Kilos</h3>
                     <p>Es <strong>obligatorio reportar</strong> cualquier bulto que exceda los 100kg.</p>
-                    <p style="font-size: 13px; margin-top: 10px; color: #fff;">• Zoom no acepta estas dimensiones.<br>• Requiere manejo especializado.<br>• Incrementa costos de estiba en puerto.</p>
+                    <p style="font-size: 14px; margin-top: 10px; color: #fff;">• Zoom no acepta estas dimensiones.<br>• Requiere manejo especializado.<br>• Incrementa costos de estiba en puerto.</p>
                 </div>
-                <div style="text-align: center;" class="hide-mobile">
-                    <i class="fa-solid fa-weight-hanging" style="font-size: 80px; color: rgba(255,255,255,0.1);"></i>
+                <div style="text-align: center;">
+                    <i class="fa-solid fa-weight-hanging" style="font-size: 80px; color: rgba(255,255,255,0.2);"></i>
                 </div>
             </div>
         </div>
@@ -361,7 +380,7 @@
                     <p>Daños causados por aceites, químicos o líquidos mal sellados dentro de las cajas no son cubiertos.</p>
                 </div>
             </div>
-            <div style="margin-top: 20px; background: rgba(249,115,22,0.1); padding: 15px; border-radius: 12px; border: 1px solid #f97316;">
+            <div style="margin-top: 20px; background: rgba(15, 23, 42, 0.9); padding: 15px; border-radius: 12px; border: 1px solid #f97316;">
                 <p style="font-size: 14px;"><strong>Nota:</strong> Las inspecciones de aduana son procesos donde la carga es manipulada por terceros oficiales. Recomendamos un embalaje profesional reforzado.</p>
             </div>
         </div>
@@ -393,7 +412,7 @@
         <div class="slide-overlay"></div>
         <div class="content-area">
             <h1>Empecemos a <br><span style="color: #f97316;">Crecer Juntos</span></h1>
-            <p style="margin-bottom: 30px;">Contáctenos para coordinar su primera entrega y formar parte de nuestra red de aliados exclusivos.</p>
+            <p style="margin-bottom: 30px; font-weight: 700;">Contáctenos para coordinar su primera entrega y formar parte de nuestra red de aliados exclusivos.</p>
             
             <div class="contact-card">
                 <a href="https://wa.me/+56955286990" class="contact-link" target="_blank">
@@ -414,14 +433,14 @@
         const btnNext = document.getElementById('btnNext');
 
         function updateNavigationUI() {
-            // Manejar Botón Atrás (Ocultar en la primera)
+            // Manejar Botón Atrás
             if (currentSlide === 1) {
                 btnPrev.classList.add('hidden');
             } else {
                 btnPrev.classList.remove('hidden');
             }
 
-            // Manejar Botón Siguiente (Cambiar a Reiniciar en la última)
+            // Manejar Botón Siguiente
             const icon = btnNext.querySelector('i');
             if (currentSlide === totalSlides) {
                 icon.className = 'fa-solid fa-rotate-left';
@@ -431,17 +450,13 @@
         }
 
         function showSlide(n) {
-            // Ocultar todas
             for (let i = 1; i <= totalSlides; i++) {
                 document.getElementById('slide' + i).classList.remove('active');
             }
-            // Mostrar la elegida
             document.getElementById('slide' + n).classList.add('active');
             currentSlide = n;
             counter.innerText = `${n.toString().padStart(2, '0')} / ${totalSlides}`;
             updateNavigationUI();
-            
-            // Scroll al inicio de la diapositiva (útil en móviles si hubo scroll previo)
             document.getElementById('slide' + n).scrollTop = 0;
         }
 
@@ -449,7 +464,7 @@
             if (currentSlide < totalSlides) {
                 showSlide(currentSlide + 1);
             } else {
-                showSlide(1); // Reiniciar
+                showSlide(1);
             }
         }
 
@@ -459,31 +474,30 @@
             }
         }
 
-        // --- GESTOS TÁCTILES (SWIPE) ---
+        // GESTOS TÁCTILES
         let touchstartX = 0;
         let touchendX = 0;
         
         function handleGesture() {
-            if (touchendX < touchstartX - 60) nextSlide(); // Swipe izquierda -> siguiente
-            if (touchendX > touchstartX + 60) prevSlide(); // Swipe derecha -> atrás
+            if (touchendX < touchstartX - 50) nextSlide();
+            if (touchendX > touchstartX + 50) prevSlide();
         }
 
         document.addEventListener('touchstart', e => {
             touchstartX = e.changedTouches[0].screenX;
-        });
+        }, {passive: true});
 
         document.addEventListener('touchend', e => {
             touchendX = e.changedTouches[0].screenX;
             handleGesture();
-        });
+        }, {passive: true});
 
-        // --- TECLADO ---
+        // TECLADO
         document.addEventListener('keydown', (e) => {
             if (e.key === "ArrowRight") nextSlide();
             if (e.key === "ArrowLeft") prevSlide();
         });
 
-        // Inicializar interfaz
         updateNavigationUI();
     </script>
 </body>
